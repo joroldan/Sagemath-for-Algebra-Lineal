@@ -276,14 +276,14 @@ def box_matrix(m, field = None, big_blocks = False, transformation = False, subd
     Dada una matriz devuelve su matriz por bloques.
     
     Parámetros:
-     - `m` es la matriz inicial
-     - `field` es el cuerpo de trabajo, si no se da ninguno se toma el de la matriz
-     - `big_blocks` (por defecto False) si lo ponemos a True toma la cadena toda unida como una única compañera de su cabeza
-     - `transformation` (por defecto False) si lo ponemos a True, devuelve no solo la matriz por bloques $B$ sino también $P$ tal que $PBP^{-1} = A$
-     - `subdivisions` (por defecto True) pone o no las líneas de corte en cada cadena
-     - `reverseChainOrder` (por defecto False) toma como base la cadena de abajo a arriba
-     - `reverseCompanionOrder` (por defecto False) toma como base en cada compeñera el orden normal o el orden inverso:  $\{f^{k-1}(v), f^{k-2}(v), \dots, f^2(v), f(v), v\}$
-     - `reverseOrder` (por defecto None) si se le da valor, este valor pisa a los dos anteriores parámetros
+     - m es la matriz inicial
+     - field es el cuerpo de trabajo, si no se da ninguno se toma el de la matriz
+     - big_blocks (por defecto False) si lo ponemos a True toma la cadena toda unida como una única compañera de su cabeza
+     - transformation (por defecto False) si lo ponemos a True, devuelve no solo la matriz por bloques B sino también P tal que PBP⁻¹ = A
+     - subdivisions (por defecto True) pone o no las líneas de corte en cada cadena
+     - reverseChainOrder (por defecto False) toma como base la cadena de abajo a arriba
+     - reverseCompanionOrder (por defecto False) toma como base en cada compeñera el orden normal o el orden inverso:  {fⁿ⁻¹(v), fⁿ⁻²(v), \dots, f²(v), f(v), v}
+     - reverseOrder (por defecto None) si se le da valor, este valor pisa a los dos anteriores parámetros
      
     Ejemplo:
     
@@ -346,13 +346,13 @@ def show_colored_box_matrix(m, field = None, big_blocks = False, subdivisions = 
     Dada una matriz pinta coloreada su matriz por bloques.
     
     Parámetros:
-     - `m` es la matriz inicial
-     - `field` es el cuerpo de trabajo, si no se da ninguno se toma el de la matriz
-     - `big_blocks` (por defecto False) si lo ponemos a True toma la cadena toda unida como una única compañera de su cabeza
-     - `subdivisions` (por defecto True) pone o no las líneas de corte en cada cadena
-     - `reverseChainOrder` (por defecto False) toma como base la cadena de abajo a arriba
-     - `reverseCompanionOrder` (por defecto False) toma como base en cada compeñera el orden normal o el orden inverso:  $\{f^{k-1}(v), f^{k-2}(v), \dots, f^2(v), f(v), v\}$
-     - `reverseOrder` (por defecto None) si se le da valor, este valor pisa a los dos anteriores parámetros
+     - m es la matriz inicial
+     - field es el cuerpo de trabajo, si no se da ninguno se toma el de la matriz
+     - big_blocks (por defecto False) si lo ponemos a True toma la cadena toda unida como una única compañera de su cabeza
+     - subdivisions (por defecto True) pone o no las líneas de corte en cada cadena
+     - reverseChainOrder (por defecto False) toma como base la cadena de abajo a arriba
+     - reverseCompanionOrder (por defecto False) toma como base en cada compeñera el orden normal o el orden inverso:  {fⁿ⁻¹(v), f^ⁿ⁻²(v), ..., f²(v), f(v), v}
+     - reverseOrder (por defecto None) si se le da valor, este valor pisa a los dos anteriores parámetros
      
     Los colores elegidos son:
      - En rojo las matrices compañeras
