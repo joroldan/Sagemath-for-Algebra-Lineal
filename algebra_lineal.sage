@@ -89,20 +89,20 @@ def projections(v, subspace1, subspace2): # Calcula las dos proyeccion de V en S
 
 def multi_union(*args):
     """Permite unir más de dos listas eliminando repetidos"""
-    result = []
+    result = set
     for v in args:
-        result = union(result,v)
-    return result
+        result = result.union(v)
+    return list(result)
     
 def listvariables(l):
     """Calcula la lista de variables que forman parte de una lista l"""
-    vars = []
+    vars = set()
     for i in l:
         try:
-            vars = union(vars, i.variables())
+            vars = vars.union(i.variables())
         except AttributeError:
             pass
-    return vars
+    return list(vars)
     
 def coordinates(vectorspace, v):
     """Método expandido de vectorspace.coordinates() para trabajar con variables
