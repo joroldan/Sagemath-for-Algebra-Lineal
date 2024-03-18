@@ -282,7 +282,7 @@ def box_matrix(m, field = None, big_blocks = False, transformation = False, subd
      - transformation (por defecto False) si lo ponemos a True, devuelve no solo la matriz por bloques B sino también P tal que PBP⁻¹ = A
      - subdivisions (por defecto True) pone o no las líneas de corte en cada cadena
      - reverseChainOrder (por defecto False) toma como base la cadena de abajo a arriba
-     - reverseCompanionOrder (por defecto False) toma como base en cada compeñera el orden normal o el orden inverso:  {fⁿ⁻¹(v), fⁿ⁻²(v), \dots, f²(v), f(v), v}
+     - reverseCompanionOrder (por defecto False) toma como base en cada compeñera el orden normal o el orden inverso:  {fⁿ⁻¹(v), fⁿ⁻²(v), ..., f²(v), f(v), v}
      - reverseOrder (por defecto None) si se le da valor, este valor pisa a los dos anteriores parámetros
      
     Ejemplo:
