@@ -267,7 +267,7 @@ def box_heads(m, field = None):
             v = candidates.basis()[0]
             heads[key] += [[i,v]]
             for j in [0..i-1]:
-                known_spaces[j]+= span([(key.subs(x=m))^(i-1-j)*(m^k)*v for k in [1..deg]])
+                known_spaces[j]+= span([(key.subs(x=m))^(i-1-j)*(m^k)*v for k in [0..deg-1]])
     return heads
 
 def box_matrix(m, field = None, big_blocks = False, transformation = False, subdivisions = True, 
