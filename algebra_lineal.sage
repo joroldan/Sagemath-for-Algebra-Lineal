@@ -54,7 +54,7 @@ def non_pivot_columns(m):
     return list(total.difference(pivots))
 
 def complement(s1, s2):
-    """Dado dos subespacios s1 ≤ s2 calcula un s3 tal que s1 ⊕ s3 = s2"""
+    """Dados dos subespacios s1 ≤ s2 calcula un s3 tal que s1 ⊕ s3 = s2"""
     if not(s1.is_subspace(s2)):
         raise ValueError("First parameter is not a subspace of the second one") 
     b1 = s1.basis_matrix().transpose()
@@ -235,7 +235,7 @@ def length_of_chains(m, field = None):
     return length_of_chains_from_chain_lengths_number(dimen)
 
 def length_of_chains_from_chain_lengths_number(dimen):
-    """Dada el resultado de "box_chain_lengths_number_from_structure/box_chain_lengths_number" calcula las longitudes de las distintas cadenas de bloques"""
+    """Dado el resultado de "box_chain_lengths_number_from_structure/box_chain_lengths_number" calcula las longitudes de las distintas cadenas de bloques"""
     dimen2 = {}
     for key in dimen.keys():
         deg = key.degree()
