@@ -515,7 +515,7 @@ def minimal_polynomial(A, v, var=x):
     if v == V.zero():
         return 1
     S = minimal_invariant_subspace(A, v)
-    coord = S.coordinates(A*v)
+    coord = S.coordinates(A^S.dimension()*v)
     return var^len(coord) - annihilator_basis_to_expressions([coord],[var^i for i in range(len(coord))])[0]
     
 def minimal_invariant_subspace(A, v):
