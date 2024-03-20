@@ -419,7 +419,7 @@ def show_colored_box_matrix(m, field = None, big_blocks = False, subdivisions = 
             else:
                 matrixListnew.append(constant_matrix(color1, matrixList[i].nrows(), matrixList[j].nrows()))
     aux = block_matrix(matrixListnew, nrows=len(matrixList))
-    p = matrix_plot(aux, cmap='Pastel1', subdivisions=True, subdivision_style=dict(color='red',thickness=2))
+    p = matrix_plot(aux, vmin=color5, vmax=color1, cmap='Pastel1', subdivisions=True, subdivision_style=dict(color='red',thickness=2))
     
     for i in range(m.nrows()):
         for j in range(m.ncols()):
