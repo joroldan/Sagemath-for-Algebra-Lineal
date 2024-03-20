@@ -159,20 +159,23 @@ def annihilator_basis_to_expressions(basis, variables):
     """Similar a "annihilator_basis_to_equations" pero sin igualar las exrpresiones a cero."""
     return matrix(basis)*vector(variables)
 
-def equations_to_matrix(eqns, variables):
+def equations_to_matrix(eqns, variables, field=None):
     """Dada una lista de ecuaciones y una lista de variables devuelve la matriz de coeficientes del sistema"""
-    return matrix([[eq.lhs().coefficient(v) - eq.rhs().coefficient(v) for v in variables] for eq in eqns])
+    if field is None:
+        field = eqns[0].lhs().base_ring()
+    return matrix(field,[[eq.lhs().coefficient(v) - eq.rhs().coefficient(v) for v in variables] for eq in eqns])
 
-def equations_to_vector_of_independent_terms(eqns, variables):
+def equations_to_vector_of_independent_terms(eqns, variables, field=None):
     """Dada una lista de ecuaciones y una lista de variables devuelve el vector de términos independientes del sistema"""
-    m = equations_to_matrix(eqns, variables)
-    v = vector([eq.rhs() - eq.lhs() for eq in eqns]) +  m * vector(variables)
+    m = equations_to_matrix(eqns, variables, field)
+    field = m.base_ring()
+    v = vector(field,[eq.rhs() - eq.lhs() for eq in eqns]) +  m * vector(variables)
     return v
 
-def equations_to_augmented_matrix(eqns, variables, subdivide=True):
+def equations_to_augmented_matrix(eqns, variables, subdivide=True, field=None):
     """Dada una lista de ecuaciones y una lista de variables devuelve la matriz ampliada de coeficientes del sistema. Por defecto con subdivisiones"""
-    m = equations_to_matrix(eqns, variables)
-    v = equations_to_vector_of_independent_terms(eqns, variables)
+    m = equations_to_matrix(eqns, variables, field)
+    v = equations_to_vector_of_independent_terms(eqns, variables, field)
     return m.augment(v,subdivide)
 
 def create_chain(xlen,ylen,vsep,x0,y0,num):
