@@ -234,17 +234,6 @@ def show_box_figure(m, field = None):
         pos += 1
     show(sum(chains),axes=False)
 
-def companion_matrix(pol):
-    """Dado un polinomio calcula su matriz compañera asociada"""
-    coef = pol.list()
-    if coef[-1] != 1:
-        raise ValueError("Polynomial must be monic")
-    size = pol.degree()
-    A = identity_matrix(size-1)
-    A = matrix([[0 for i in (1..size-1)]]).T.augment(A).T
-    A = A.augment(-vector(coef[:-1]))
-    return A
-
 def length_of_chains(m, field = None):
     """Dada una matriz calcula las longitudes de las distintas cadenas de bloques"""
     dimen = box_chain_lengths_number(m, field)
