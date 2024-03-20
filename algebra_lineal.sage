@@ -115,13 +115,26 @@ def coordinates(vectorspace, v):
     |    V  = VectorSpace(QQ,3).subspace_with_basis([v1,v2,v3])
     |    var('x')
     |    coordinates(V,[1,2*x+2,3*x-1])
+
+    Si se aplica sobre un espacio que no es el total muestra un warning de qué necesita el vector para estar contenido en el espacio.
     """
     variables = listvariables(v) #multi_union(*map(lambda e: e.variables(), v))
     p = PolynomialRing(vectorspace.base(), variables) 
     m = vectorspace.basis_matrix().transpose()
     m = m.base_extend(p)
     m = m.augment(vector(p, v))
-    return m.echelon_form().column(-1)
+    coords = m.echelon_form().column(-1)
+    coord1 = coords[0:vectorspace.dimension()]
+    coord2 = list(filter(lambda a: a!=0, coords[vectorspace.dimension():]))
+    if len(coord2) > 0:
+        fun = warnings.formatwarning
+        warnings.formatwarning = lambda a,b,c,d,e='': str(f"Warning: {a}")
+        if len(coord2) == 1:
+            warnings.warn(f"{coord2[0]} must be zero.")
+        else:
+            warnings.warn(f"{coord2} must be all zero.")
+        warnings.formatwarning = fun
+    return coord1
 
 def coordinate(vectorspace, v, i):
     """Método similar a coordinates(vectorspace, v) pero devolviendo la i-ésima coordenada (empezando a contar en cero)"""
