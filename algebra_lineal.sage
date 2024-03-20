@@ -62,7 +62,7 @@ def complement(s1, s2):
     m  = b1.augment(b2)
     np = pivot_columns(m)
     n  = s1.dimension()
-    return span([s2.basis()[i-n] for i in np if i >= n])
+    return span(s1.base_ring(),[s2.basis()[i-n] for i in np if i >= n])
 
 def projections(v, subspace1, subspace2): # Calcula las dos proyeccion de V en S1 y S2
     """Dado un vector v ∈ subspace1 ⊕ subspace2 calcula las dos proyecciones sobre cada uno de ellos
