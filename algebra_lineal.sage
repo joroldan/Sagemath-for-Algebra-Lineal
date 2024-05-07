@@ -589,7 +589,7 @@ def orthogonal_subspace(S, matrix):
     anh = V.annihilator_basis(S.basis(),lambda x,y: vector(F,[x*matrix*y]))
     return V.subspace(anh)
     
-def gram_schmidt(B,M,orthonormal=False):
+def gram_schmidt(B, M=None, orthonormal=False):
     """ Dada una matriz fila o lista de vectores aplica Gram-Schmidt
     
     Parámetros:
@@ -613,6 +613,11 @@ def gram_schmidt(B,M,orthonormal=False):
         lista = True
     else:
         raise ValueError("B no es matriz ni lista")
+    if M is None:
+        M = identity_matrix(len(B[0]))
+    elif M is True or M is False:
+        orthonormal = M
+        M = identity_matrix(len(B[0]))
     nvlist = []
     for v in vlist:
         nvlist.append(v - sum([(v*M*w)/(w*M*w)*w for w in nvlist]))
