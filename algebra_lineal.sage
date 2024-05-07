@@ -1,3 +1,7 @@
+import re
+
+# Práctica 1
+
 def matrix_change_basis(original, final=None, field=None):
     """Calcula la matriz de cambio de base entre una base original y una base final.
     
@@ -533,3 +537,88 @@ def minimal_invariant_subspace(A, v):
         v = A*v
         S = V.subspace_with_basis(S.basis() + [v])
     return S
+
+# Práctica 2
+
+def square_form(Q1, variables=None):
+    """Dada una forma cuadrática muestra su expresión polinómica formando cuadrados
+    
+    Parámetros:
+        - Q1: forma cuadrática
+        - variables (por defecto (x0,x1,...)): lista de variables a usar
+    """
+    Q1 = QuadraticForm(QQ,Q1.dim(),Q1.coefficients())
+    Q2, P2 = Q1.rational_diagonal_form(return_matrix=True)
+    P = ~P2
+    pol1 = Q1.polynomial() if variables is None else Q1.polynomial(names=variables)
+    pol2 = Q2.polynomial() if variables is None else Q2.polynomial(names=variables)
+    
+    va = pol1.variables()
+    v  = P * vector(va)
+    
+    vaO = list(map(lambda l: str(l), va))
+    vaN = copy(vaO) #list(map(lambda s: s[0] + "n" + s[1:], vaO)) 
+    
+    chg = []
+    for e in v:
+        s1 = str(e)
+        for i in range(len(vaO)):
+            s1 = s1.replace(vaO[i],vaN[i])
+        chg.append(s1)
+        
+    m = min([len(v) for v in vaO])
+    chg = ["(" + v + ")" if len(v) > m + 1 else v for v in chg]
+    
+    repl = {vaO[i]: chg[i] for i in range(len(vaO))}
+    
+    pattern = '|'.join(map(re.escape, sorted(repl, key=len, reverse=True)))
+    print("Before:",Q1.polynomial(names=vaO))
+    return re.sub(pattern, lambda m: repl[m.group()], str(pol2))
+    
+def orthogonal_subspace(S, matrix):
+    """Calcula el ortogonal de S respecto a una matriz
+    
+    Ejemplo:
+    |   V = VectorSpace(QQ,3)
+    |   S = V.subspace([[1,2,1],[0,2,1]])
+    |   M = matrix(3,[0,0,0,0,0,0,0,0,1])
+    |   orthogonal_subspace(S,M)
+    """
+    V = S.ambient_vector_space()
+    F = S.base()
+    anh = V.annihilator_basis(S.basis(),lambda x,y: vector(F,[x*matrix*y]))
+    return V.subspace(anh)
+    
+def gram_schmidt(B,M,orthonormal=False):
+    """ Dada una matriz fila o lista de vectores aplica Gram-Schmidt
+    
+    Parámetros:
+        - B: matriz fila o lista de vectores que forman una base inicial
+        - M: matriz de Gram del producto escalar
+        - orthonormal (por defecto False): indica si se debe o no ortonormalizar la base
+        
+    Devuelve la matriz fila o lista ortogonalizada u ortonormalizada.
+    
+    Ejemplo:
+    |   M = matrix([[2,1,0],[1,2,0],[0,0,1]])
+    |   v = vector([1,2,1])
+    |   w = vector([1,-1,0])
+    |   gram_schmidt([v,w],M)
+    """
+    if B.__class__.__module__.startswith('sage.matrix.'):
+        vlist = B.rows()
+        lista = False
+    elif isinstance(B, list | tuple):
+        vlist = B
+        lista = True
+    else:
+        raise ValueError("B no es matriz ni lista")
+    nvlist = []
+    for v in vlist:
+        nvlist.append(v - sum([(v*M*w)/(w*M*w)*w for w in nvlist]))
+    if(orthonormal):
+        nvlist = [v/sqrt(v*M*v) for v in nvlist]
+    if(lista):
+        return nvlist
+    else:
+        return matrix(nvlist)
