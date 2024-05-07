@@ -68,7 +68,7 @@ def complement(s1, s2):
     n  = s1.dimension()
     return span(s1.base_ring(),[s2.basis()[i-n] for i in np if i >= n])
 
-def projections(v, subspace1, subspace2): # Calcula las dos proyeccion de V en S1 y S2
+def projections(v, subspace1, subspace2):
     """Dado un vector v ∈ subspace1 ⊕ subspace2 calcula las dos proyecciones sobre cada uno de ellos
     
     Ejemplo:
@@ -446,8 +446,6 @@ def create_matrix(dimen, field=None):
         matrixList2 = list()
         deg = key.degree()
         for d in dimen[key]:
-            # d = 5
-            # deg = 2 
             matrixList3 = list()
             for i in (1..d):
                 for j in (1..d):
@@ -557,7 +555,7 @@ def square_form(Q1, variables=None):
     v  = P * vector(va)
     
     vaO = list(map(lambda l: str(l), va))
-    vaN = copy(vaO) #list(map(lambda s: s[0] + "n" + s[1:], vaO)) 
+    vaN = copy(vaO)
     
     chg = []
     for e in v:
@@ -594,7 +592,7 @@ def gram_schmidt(B, M=None, orthonormal=False):
     
     Parámetros:
         - B: matriz fila o lista de vectores que forman una base inicial
-        - M: matriz de Gram del producto escalar
+        - M: matriz de Gram del producto escalar (por defecto la identidad)
         - orthonormal (por defecto False): indica si se debe o no ortonormalizar la base
         
     Devuelve la matriz fila o lista ortogonalizada u ortonormalizada.
