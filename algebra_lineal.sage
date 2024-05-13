@@ -160,7 +160,7 @@ def annihilator_basis_to_equations(basis, variables):
     return [sum([elto[i] * variables[i] for i in range(len(variables))]) == 0 for elto in basis]
 
 def annihilator_basis_to_expressions(basis, variables):
-    """Similar a "annihilator_basis_to_equations" pero sin igualar las exrpresiones a cero."""
+    """Similar a "annihilator_basis_to_equations" pero sin igualar las expresiones a cero."""
     return matrix(basis)*vector(variables)
 
 def equations_to_matrix(eqns, variables, field=None):
@@ -258,7 +258,7 @@ def length_of_chains_from_chain_lengths_number(dimen):
     return dimen2
     
 def box_heads(m, field = None):
-    """Dada una matriz m da una posible elección de los vectores cabeza de cada cadena de bloques prececidos por la longitud en bloques de la cadena que encabezan"""
+    """Dada una matriz m da una posible elección de los vectores cabeza de cada cadena de bloques precedidos por la longitud en bloques de la cadena que encabezan"""
     if field is None:
         field = m.base_ring()
     struc = box_structure(m, field)
@@ -291,7 +291,7 @@ def box_matrix(m, field = None, big_blocks = False, transformation = False, subd
      - transformation (por defecto False) si lo ponemos a True, devuelve no solo la matriz por bloques B sino también P tal que PBP⁻¹ = A
      - subdivisions (por defecto True) pone o no las líneas de corte en cada cadena
      - reverseChainOrder (por defecto False) toma como base la cadena de abajo a arriba
-     - reverseCompanionOrder (por defecto False) toma como base en cada compeñera el orden normal o el orden inverso:  {fⁿ⁻¹(v), fⁿ⁻²(v), ..., f²(v), f(v), v}
+     - reverseCompanionOrder (por defecto False) toma como base en cada compañera el orden normal o el orden inverso:  {fⁿ⁻¹(v), fⁿ⁻²(v), ..., f²(v), f(v), v}
      - reverseOrder (por defecto None) si se le da valor, este valor pisa a los dos anteriores parámetros
      
     Ejemplo:
@@ -360,13 +360,13 @@ def show_colored_box_matrix(m, field = None, big_blocks = False, subdivisions = 
      - big_blocks (por defecto False) si lo ponemos a True toma la cadena toda unida como una única compañera de su cabeza
      - subdivisions (por defecto True) pone o no las líneas de corte en cada cadena
      - reverseChainOrder (por defecto False) toma como base la cadena de abajo a arriba
-     - reverseCompanionOrder (por defecto False) toma como base en cada compeñera el orden normal o el orden inverso:  {fⁿ⁻¹(v), f^ⁿ⁻²(v), ..., f²(v), f(v), v}
+     - reverseCompanionOrder (por defecto False) toma como base en cada compañera el orden normal o el orden inverso:  {fⁿ⁻¹(v), f^ⁿ⁻²(v), ..., f²(v), f(v), v}
      - reverseOrder (por defecto None) si se le da valor, este valor pisa a los dos anteriores parámetros
      
     Los colores elegidos son:
      - En rojo las matrices compañeras
      - En azul los enlaces de cadenas
-     - En naraja la parte cero dentro de una cadena
+     - En naranja la parte cero dentro de una cadena
      - En amarillo la parte cero dentro de cada invariante
      - En gris la parte cero fuera de cada invariante por invarianza
     """
@@ -481,7 +481,7 @@ def randomize_base_in_matrix(m, field=None, random_level=1, forceField=False):
     Parámetros:
      - m: la matriz cuadrada inicial
      - field (opcional, si no se especifica se elige el anillo de la matriz)
-     - random_level: 1 (poco) o 2 (mucho) indica el grado de mezcla de la nueva base. A mayor grado más enresevada en la matriz resultante
+     - random_level: 1 (poco) o 2 (mucho) indica el grado de mezcla de la nueva base. A mayor grado, más enrevesada es la matriz resultante
      - forceField (por defecto False). Indica si la matriz final debe estar en el mismo field que la inicial. Útil para forzar enteros.
     """
     if m.nrows() != m.ncols():
